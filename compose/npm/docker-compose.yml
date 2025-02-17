@@ -1,0 +1,43 @@
+version: '3'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'    # HTTP
+      - '81:81'    # Admin interface
+      - '443:443'  # HTTPS
+    environment:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: "PASSWORD"
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - npm:/data
+      - npm_letsencrypt:/etc/letsencrypt
+    networks:
+      - npm_net
+
+  db:
+    image: 'mysql:5.7'
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'PASSWORD'
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: 'PASSWORD'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - npm_net
+
+networks:
+  npm_net:
+    external: true  # For internal-only services
+
+volumes:
+  npm:
+    external: true  # Existing shared volume for NPM data
+  npm_letsencrypt:
+    external: true  # Existing shared volume for SSL certificates

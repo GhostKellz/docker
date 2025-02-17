@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  it-tools:
+    image: 'corentinth/it-tools:latest'
+    ports:
+      - '8200:80'  # Optional (Public-facing port)
+    restart: unless-stopped
+    container_name: it-tools
+    networks:
+      - nginx-net   # Internal network for Nginx
+    volumes:
+      - it-tools:/data/it-tools  # Mount the external volume to /data/it-tools
+
+volumes:
+  it-tools:
+    external: true  # Make sure the volume is external
+
+networks:
+  nginx-net:
+    external: true  # Use existing nginx-net network

@@ -1,0 +1,29 @@
+services:
+  dockerproxy:
+    image: ghcr.io/tecnativa/docker-socket-proxy:latest
+    container_name: dockerproxy
+    environment:
+      - CONTAINERS=1  # Allow access to container information
+      - SERVICES=1    # Allow access to service information
+      - TASKS=1       # Allow access to task information
+      - POST=0        # Disable any write operations
+    ports:
+      - 2375:2375  # Expose the Docker API on backend_net
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - dockerproxy:/var/run/docker.sock:ro  # Secure, read-only mount
+    networks:
+      - npm_net    # Internal communication only
+      - nginx-net  # Communication with external services
+
+volumes:
+  dockerproxy:
+    external: true  # Ensure the volume exists beforehand
+
+networks:
+  npm_net:
+    external: true  # Existing internal network
+  nginx-net:
+    external: true  # Existing public-facing network

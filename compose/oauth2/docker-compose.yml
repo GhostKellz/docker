@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  oauth2:
+    image: bitnami/oauth2-proxy:7
+    container_name: oauth2-proxy
+    networks:
+      - oauth2-proxy
+    restart: always
+    ports:
+      - '8555:4180'
+    environment:
+      - OAUTH2_PROXY_CONFIG=/etc/oauth2-proxy.cfg
+      - OAUTH2_PROXY_EMAIL_DOMAINS=resolvetech.biz
+      - OAUTH2_PROXY_CLIENT_ID=apps.googleusercontent.com
+      - OAUTH2_PROXY_CLIENT_SECRET=CLIENT_SECRET_HERE
+      - OAUTH2_PROXY_COOKIE_SECRET=COOKIE_SECRET_HERE
+      - OAUTH2_PROXY_REVERSE_PROXY=True
+      - OAUTH2_PROXY_CUSTOM_SIGN_IN_LOGO=LOGO-PATH.png 
+      - OAUTH2_PROXY_FOOTER=-
+
+networks:
+  oauth2-proxy:
+    driver: bridge

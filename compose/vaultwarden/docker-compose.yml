@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    networks:
+      - nginx-net
+    volumes:
+      - vaultwarden:/data  # Use the 'vaultwarden' volume for persistent data
+    ports:
+      - 8822:80  # Expose Vaultwarden on port 8822
+    environment:
+      ROCKET_ENV: "production"
+      WEBSOCKET_ENABLED: "true"  # Enable WebSocket support for NPM
+      LOG_LEVEL: "info"
+
+networks:
+  nginx-net:
+    external: true  # Ensure the service is on the correct network
+
+volumes:
+  vaultwarden:
+    external: true  # Ensure the volume is external (already created)

@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  privatebin:
+    image: privatebin/nginx-fpm-alpine:1.2.1
+    read_only: true  # Read-only mode to secure the container
+    volumes:
+      - /var/lib/docker/volumes/privatebin/_data/privatebin/srv/data:/srv/data  # Data volume for pastes
+      - /var/lib/docker/volumes/privatebin/_data/privatebin/srv/cfg:/srv/cfg  # Configuration file
+    ports:
+      - "8282:80"  # Expose the container on port 8282
+    restart: always
+    networks:
+      - nginx-net  # Use nginx-net for internal network communication
+
+networks:
+  nginx-net:
+    external: true  # Use the existing nginx-net network

@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  acme.sh:
+    image: neilpang/acme.sh
+    command: daemon
+    volumes:
+      - ./out/:/acme.sh/
+    environment:
+      - AZUREDNS_SUBSCRIPTIONID=SUBIDGOESHERE
+      - AZUREDNS_TENANTID=TENANT-ID-GOES-HERE
+      - AZUREDNS_APPID=APP-ID-GOES-HERE
+      - AZUREDNS_CLIENTSECRET=CLIENT-SECRET-FROM-ENTRA-APP-REGISTRATION
+      # RUN STAGING FIRST!!!
+      # docker exec -it acmesh-acme.sh-1 acme.sh  acme.sh --issue -d resolvetech.biz -d '*.resolvetech.biz' --dns dns_azure   --staging --force --debug
+      # May require First: acme.sh --issue --dns dns_azure -d "*.resolvetech.biz" --force
+      - ACME_SERVER=https://acme-v02.api.letsencrypt.org/directory  # Let's Encrypt production server
+    restart: always

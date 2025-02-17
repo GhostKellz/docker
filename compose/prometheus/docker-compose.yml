@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    network_mode: host  # This uses the host's network directly
+    ports:
+      - "6060:6060"  # Expose Prometheus UI
+    volumes:
+      - /var/lib/docker/volumes/prometheus/_data/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+
+
+networks:
+  npm_net:
+    external: true
+
+volumes:
+  prometheus:

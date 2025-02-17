@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  acme.sh:
+    image: neilpang/acme.sh
+    command: daemon
+    volumes:
+      - ./out/:/acme.sh/
+    environment:
+      # Cloudflare API credentials for DNS-01 challenge
+      # Cloudflare recommends storing these in environment files for security
+      # Create a file named .env.cf in the same directory with the following lines:
+      # CF_Email=your-email@example.com
+      # CF_Key=your-cloudflare-global-api-key
+      # Then reference it below by uncommenting the env_file line.
+      #- env_file: .env.cf
+
+      # Alternatively, set them directly here (less secure):
+      - CF_Email=your-email@example.com           # Your Cloudflare account email
+      - CF_Key=your-cloudflare-global-api-key    # Cloudflare API key for DNS management
+
+      # Let's Encrypt Staging Server - Use this for testing
+      - ACME_SERVER=https://acme-staging-v02.api.letsencrypt.org/directory  # Let's Encrypt staging server
+
+      # Uncomment the line below for production (after confirming staging works)
+      # - ACME_SERVER=https://acme-v02.api.letsencrypt.org/directory  # Let's Encrypt production server
+
+      # Specify Cloudflare for DNS challenge
+      - DEPLOY_DNS=cloudflare
+
+    restart: always
+
+# Instructions:
+# 1. Create a .env.cf file in the same directory to store sensitive credentials securely.
+# 2. Add it to .gitignore to prevent it from being committed.
+# 3. For staging, use the ACME_SERVER line with 'staging'. For production, switch to the production line.
+# 4. Run the container using: docker-compose up -d acme.sh
+

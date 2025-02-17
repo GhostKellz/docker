@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  cloudflare-ddns:
+    image: favonia/cloudflare-ddns:latest
+    container_name: cloudflare-ddns
+    restart: always
+    user: "1000:1000" # Ensure this matches the user ID of the current user
+    read_only: true
+    cap_drop: [all]
+    security_opt: [no-new-privileges:true]
+    networks:
+      - npm_net
+      - nginx-net
+    environment:
+      - CLOUDFLARE_API_TOKEN=INSERT-API-HERE
+
+      - DOMAINS=tools.cktech.org,cktechlab.com,wiki.cktech.org,plex.cktech.org,uptime.cktech.org,git.cktech.org,note.cktech.org
+      - PROXIED=true
+      - IP6_PROVIDER=none
+
+networks:
+  npm_net:
+    external: true
+  nginx-net:
+    external: true

@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    ports:
+      - "3005:3000"  # Map internal port 3000 to external port 3005 for direct access
+      - "2222:22"    # SSH Access
+    volumes:
+      - git_data:/data/gitea  # Use the 'git_data' volume for persistent data
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: unless-stopped
+    networks:
+      - nginx-net   # Internal network for internal access
+      - npm_net     # Public-facing network for future Traefik routing
+
+volumes:
+  git_data:
+    external: true  # Ensure the 'git_data' volume exists
+
+networks:
+  nginx-net:
+    external: true
+  npm_net:
+    external: true

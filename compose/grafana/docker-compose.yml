@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    network_mode: host  # This uses the host's network directly
+
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=PASSWORD123!  # Set Grafana admin password
+    ports:
+      - "3000:3000"  # Expose Grafana UI on default port
+    volumes:
+      - grafana:/var/lib/grafana  # Store Grafana data
+    restart: unless-stopped
+
+networks:
+  nginx_net:
+    external: true
+  npm_net:
+    external: true
+
+volumes:
+  grafana:

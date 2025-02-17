@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  wikijs:
+    image: requarks/wiki:latest
+    container_name: wikijs
+    ports:
+      - "3033:3000"  # Wiki.js accessible on port 3033
+    networks:
+      - nginx-net
+    environment:
+      - DB_TYPE=postgres
+      - DB_HOST=wikidb
+      - DB_PORT=5432
+      - DB_USER=wikijs
+      - DB_PASS=DB_PASSWORD_HERE
+      - DB_NAME=wiki
+    volumes:
+      - wiki:/var/wiki/data  # Use the 'wiki' volume for persistent data storage
+    restart: unless-stopped
+
+  wikidb:
+    image: postgres:13
+    container_name: wikidb
+    networks:
+      - nginx-net
+    environment:
+      POSTGRES_USER: wikijs
+      POSTGRES_PASSWORD: DB_PASSWORD!
+      POSTGRES_DB: wiki
+    volumes:
+      - pg-data:/var/lib/postgresql/data  # Local volume for PostgreSQL data
+    restart: unless-stopped
+
+networks:
+  nginx-net:
+    external: true
+
+volumes:
+  wiki:
+    external: true  # Use an existing external volume for Wiki.js data
+  pg-data:
+    external: false  # Local volume for PostgreSQL data
