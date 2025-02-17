@@ -6,44 +6,45 @@ This repository contains Docker Compose files, CLI commands, and scripts for con
 
 ```plaintext
 docker/
-    ├── README.md                   # Overview of the repository
-    ├── docker-compose.yml           # Core services compose file
-    ├── cli-commands.md              # Common Docker CLI commands
-    ├── stacks/                      # Organized compose stacks by service
-    │   ├── nginx-proxy-manager/     # Nginx Proxy Manager container
-    │   │    └── docker-compose.yml
-    │   ├── portainer/               # Portainer container
-    │   │    └── docker-compose.yml
-    │   ├── technitium-dns/          # Technitium DNS container
-    │   │    └── docker-compose.yml
-    │   ├── unifi-controller/        # Unifi Controller container
-    │   │    └── docker-compose.yml
-    │   ├── uptime-kuma/             # Uptime Kuma container
-    │   │    └── docker-compose.yml
-    │   ├── vaultwarden/             # Vaultwarden container
-    │   │    └── docker-compose.yml
-    │   ├── git/                     # Git container (e.g., Gitea/GitLab)
-    │   │    └── docker-compose.yml
-    │   ├── dockerproxy/             # Docker Proxy container
-    │   │    └── docker-compose.yml
-    │   ├── tools/                   # Various tools container
-    │   │    └── docker-compose.yml
-    │   ├── prometheus/              # Prometheus monitoring stack
-    │   │    └── docker-compose.yml
-    │   ├── wiki-js/                 # Wiki.js documentation container
-    │   │    └── docker-compose.yml
-    │   ├── hudu/                    # Hudu documentation container
-    │   │    └── docker-compose.yml
-    │   ├── oauth2/                  # OAuth2 Proxy container
-    │   │    └── docker-compose.yml
-    │   ├── cloudflare-ddns/         # Cloudflare DDNS container
-    │   │    └── docker-compose.yml
-    │   └── powerdns/                # PowerDNS authoritative server
-    │        └── docker-compose.yml
-    └── scripts/                      # Useful Docker scripts
-        ├── prune.sh                  # Cleanup old containers/images
-        ├── backup.sh                 # Backup container volumes
-        └── restore.sh                # Restore from backups
+├── README.md                   # Overview of the repository
+├── docker-compose.yml          # Core services compose file
+├── cli-commands.md             # Common Docker CLI commands
+├── stacks/                     # Organized Docker stacks by service
+│   ├── nginx/                  # Nginx reverse proxy with ACME SSL
+│   │   └── docker-compose.yml
+│   └── portainer/              # Portainer container
+│       └── docker-compose.yml
+├── compose/                    # Docker Compose configurations for services
+│   ├── technitium-dns/         # Technitium DNS container
+│   │   └── docker-compose.yml
+│   ├── unifi-controller/       # Unifi Controller container
+│   │   └── docker-compose.yml
+│   ├── uptime-kuma/            # Uptime Kuma container
+│   │   └── docker-compose.yml
+│   ├── vaultwarden/            # Vaultwarden container
+│   │   └── docker-compose.yml
+│   ├── git/                    # Git container (e.g., Gitea/GitLab)
+│   │   └── docker-compose.yml
+│   ├── dockerproxy/            # Docker Proxy container
+│   │   └── docker-compose.yml
+│   ├── tools/                  # Various tools container
+│   │   └── docker-compose.yml
+│   ├── prometheus/             # Prometheus monitoring stack
+│   │   └── docker-compose.yml
+│   ├── wiki-js/                # Wiki.js documentation container
+│   │   └── docker-compose.yml
+│   ├── hudu/                   # Hudu documentation container
+│   │   └── docker-compose.yml
+│   ├── oauth2/                 # OAuth2 Proxy container
+│   │   └── docker-compose.yml
+│   ├── cloudflare-ddns/        # Cloudflare DDNS container
+│   │   └── docker-compose.yml
+│   └── powerdns/               # PowerDNS authoritative server
+│       └── docker-compose.yml
+└── scripts/                    # Useful Docker scripts
+    ├── prune.sh                # Cleanup old containers/images
+    ├── backup.sh               # Backup container volumes
+    └── restore.sh              # Restore from backups
 ```
 
 ## 🛠️ Getting Started
