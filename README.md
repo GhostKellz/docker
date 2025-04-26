@@ -1,7 +1,17 @@
 # 🐳 Docker Repository
+---
+<p align="center">
+  <img src="https://img.shields.io/badge/Docker-Container_Platform-2496ed?logo=docker&logoColor=white"/> &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/Compose-Docker_orchestration-2496ed?logo=docker&logoColor=white"/> &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/Portainer-Docker_GUI-13BEF9?logo=portainer&logoColor=white"/> &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/NGINX-Reverse_Proxy-009639?logo=nginx&logoColor=white"/> &nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/Optimized-⚡🚀🔒-00bcd4"/>
+</p>
 
-This repository contains Docker Compose files, CLI commands, and scripts for containerized services within the CKTech infrastructure. It serves as a centralized location to manage and deploy various services efficiently.
-
+---
+> 🛠️ **About this repository:**  
+> Docker Compose stacks and orchestration files for containerized services, centralized via Portainer, reverse proxied with NGINX, and tuned for performance, security, and efficient service deployment.
+---
 ## 📂 Directory Structure
 
 ```plaintext
