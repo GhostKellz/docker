@@ -1,0 +1,17 @@
+services:
+  ghostctl-runner:
+    build: .
+    container_name: ghostctl-runner
+    restart: unless-stopped
+    environment:
+      - RUNNER_ALLOW_RUNASROOT=1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
